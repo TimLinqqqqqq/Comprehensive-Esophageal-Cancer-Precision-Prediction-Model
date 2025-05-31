@@ -18,3 +18,6 @@
    - 標籤檔：`labels.csv`
    - MedicalNet 預訓練權重：`resnet_200.pth`
    - 模型程式：`resnet.py` 放在 `MedicalNet/models/`
+
+
+## datasets
