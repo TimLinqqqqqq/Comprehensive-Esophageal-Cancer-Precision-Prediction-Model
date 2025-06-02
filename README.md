@@ -21,3 +21,4 @@
 
 
 ## datasets
+資料在NAS中，路徑是\Laboratory\計畫相關\國科會一般研究計畫\全方位食道癌精準預測模型\FJHos_final
