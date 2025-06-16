@@ -1,25 +1,36 @@
 # Comprehensive-Esophageal-Cancer-Precision-Prediction-Model
 # 全方位食道癌精準預測模型
 
-# MedicalNet GN Model Training
+1. Dataset Preparation
+Images & masks
+data_train_test_2/
+  ├── TrainVolumes/   # training NIfTI volumes
+  └── TestVolumes/    # testing  NIfTI volumes
 
-## 環境需求
-| 套件名稱       | 版本            | 備註                        |
-|----------------|-----------------|-----------------------------|
-| `torch`        | 1.9.0+cu111     | ⚠️ 建議升級至 ≥1.10         |
-| `monai`        | 1.3.2           | ✅ 滿足 `>=1.0.1` 要求      |
-| `numpy`        | 1.24.4          |                             |
-| `pandas`       | 2.0.3           |                             |
-| `scikit-learn` | 1.3.2           |                             |
-| `nibabel`      | 5.2.1           |                             |
+Labels
+labels.csv with columns PatientID, Outcome, plus 4 clinical features
 
-## 執行步驟
-1. 確保以下路徑存在並正確：
-   - 資料夾：`data_train_test_2/TrainVolumes`、`TestVolumes`
-   - 標籤檔：`labels.csv`
-   - MedicalNet 預訓練權重：`resnet_200.pth`
-   - 模型程式：`resnet.py` 放在 `MedicalNet/models/`
+Pre-processed samples
+Examples (cropped & resampled to 50) are in data_50/.
 
+2. Pre-trained Weights
+Download resnet_200.pth from MedicalNet and place it under
+MedicalNet/pretrain/resnet_200.pth
 
-## datasets
-資料在NAS中，路徑是\Laboratory\計畫相關\國科會一般研究計畫\全方位食道癌精準預測模型\FJHos_final
+3. Training & Testing
+# train + validate (default 5-fold CV)
+bash model.sh                 # edit the script to adjust parameters
+
+4. Outputs
+Metrics (AUC, Accuracy, F1)
+log
+
+5. Project Structure
+├── MedicalNet/                # sub-repo with resnet.py and weights
+├── data_train_test_2/         # raw volumes & labels
+├── data_50/                   # pre-processed samples
+├── clinical_data_processing.py
+├── data_augmentation.py
+├── model.sh                   # training script
+├── model_best.py              # inference script
+└── README.md
